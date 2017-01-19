@@ -56,7 +56,7 @@ class Product(Timestampable):
     description = models.TextField("Product Description")
     quantity = models.PositiveIntegerField("Produc Quantity", default=0)
     categories = models.ManyToManyField(Category, on_delete=models.CASCADE)
-    # tags = models.ManyToManyField(Tag, on_delete=models.CASCADE)
+    tags = models.ManyToManyField(Tag, on_delete=models.CASCADE)
     price = models.FloatField("Product Price", default=0)
     vat = models.FloatField("VAT", default=0)
     discount_percent = models.FloatField("Discount Percentage", default=0)
@@ -130,3 +130,11 @@ class Slider(Timestampable):
 
     def __str__(self):
         return self.title
+
+
+class SiteConfig(Timestampable):
+    key = models.CharField("Site Config Key", max_length=255)
+    value = models.TextField("Site Config Value")
+
+    def __str__(self):
+        return self.key
