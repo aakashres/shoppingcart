@@ -46,6 +46,7 @@ class UserForm(forms.ModelForm):
             raise forms.ValidationError("You must confirm your password")
         if password1 != password2:
             raise forms.ValidationError("Your passwords do not match")
+
         return password2
 
 

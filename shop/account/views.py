@@ -6,7 +6,6 @@ from django.contrib.auth.models import Group
 
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
 
 
 # Create your views here.
@@ -35,7 +34,7 @@ class FrontendRegistrationView(View):
         if userForm.is_valid() and profileForm.is_valid():
             user = userForm.save(commit=False)
             profile = profileForm.save(commit=False)
-            password = user.password
+            password = userForm.cleaned_data.get('password2')
             user.set_password(password)
             user.save()
             profile.user = user
