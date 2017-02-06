@@ -34,7 +34,7 @@ class Message(Timestampable):
     body = models.TextField("Message Body", blank=True)
 
     def __str__(self):
-        return self.sender + "->" + self.recipient
+        return self.sender.username + "->" + self.recipient.username
 
     class Meta:
-        ordering = ["-updated_at", "-id"]
+        ordering = ["-created_at", "-id"]

@@ -1,0 +1,85 @@
+{% extends 'layouts/admin/base.html' %}
+{% load staticfiles %}
+
+
+{% block content %}<section class=" style-default-bright">
+
+<!-- BEGIN INBOX -->
+<div class="section-body">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="row">
+
+                <!-- BEGIN INBOX EMAIL LIST -->
+                <div class="col-md-5 col-lg-4 height-6 scroll-sm">
+                <h3 class="no-margin">Users</h3>
+                    <strong>{{reques.user.username}}</strong>
+                    <hr/>
+                    <div class="list-group list-email list-gray scroll height-12">
+                    {% if messageObjectList %}
+                    {% for messageObject in messageObjectList %}
+                        <a href="{% url 'message:adminMessage' messageObject.user.username %}" class="list-group-item">
+                            <h5>{{messageObject.user.get_full_name}}</h5>
+                            <p class="hidden-xs hidden-sm">{{messageObject.message|truncatechars:100}}</p>
+                            <div class="stick-top-right small-padding text-default-light text-sm">{{messageObject.last_sent}}</div>
+                        </a>
+                    {% endfor %}
+                    {% endif %}
+                    </div><!--end .list-group -->
+                </div><!--end .col -->
+                <!-- END INBOX EMAIL LIST -->
+
+                <!-- BEGIN EMAIL CONTENT -->
+                <div class="col-md-7 col-lg-8 ">
+                    <h3 class="no-margin">{{user.get_full_name}}
+                    <small>
+                    <span class="pull-right text-default-light">Today, 08:12 am</span>
+                    </small>
+                    </h3>
+                    <hr/>
+                    <div class=" scroll height-10">
+                    {% for message in userMessages %}
+                    <div class="row" >
+                    {% ifequal message.sender.username "adminmessage" %}
+                    <div class="col-lg-6">
+                    {% else %}
+                    <div class="col-lg-offset-6 col-lg-6" style="direction: rtl;">
+                    {% endifequal %}
+                    <p >
+                        {{message.body}}
+                    </p>
+                    </div>
+                    </div>
+                    {% endfor %}
+                    </div>
+                    <form action="" method="POST" class="form" role="form" style="padding-top:15px">
+                    {% csrf_token %}
+                        <div class="row">
+                            <div class="col-lg-10">
+                                <div class="form-group floating-label">
+                                    {{messageForm.body}}
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <button type="submit" class="btn ink-reaction">Send <i class="fa fa-send"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div><!--end .col -->
+                <!-- END EMAIL CONTENT -->
+
+            </div><!--end .row -->
+        </div><!--end .col -->
+    </div><!--end .row -->
+</div><!--end .section-body -->
+<!-- END INBOX -->
+</section>
+
+{% endblock %}
+
+
+{% block extra_js%}
+<script type="text/javascript">
+    $('#message').addClass('active')
+</script>
+{% endblock %}
