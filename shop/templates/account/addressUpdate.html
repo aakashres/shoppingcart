@@ -1,0 +1,107 @@
+{% extends 'layouts/frontend/base.html' %}
+{% load staticfiles %}
+
+
+{% block head_title %}
+Add Address
+{% endblock %}
+
+{% block content%}
+<div class="main-container container">
+  {% block breadcrumb %}
+    <ul class="breadcrumb">
+      <li><a href="#"><i class="fa fa-home"></i></a></li>
+      <li><a href="#">Profile </a></li>
+      <li><a href="#">Address</a></li>
+      <li><a href="#">Update</a></li>
+    </ul>
+  {% endblock %}
+  <div class="row">
+      <div id="content" class="col-sm-12">
+          <h2 class="title">Update Address</h2>
+          <form action="" method="post" enctype="multipart/form-data" class="form-horizontal account-register clearfix">
+          {% csrf_token %}
+              <fieldset id="account">
+                  <legend>Your Address Details</legend>
+                  <div class="form-group required">
+                      <label class="col-sm-2 control-label" for="{{ form.district.id_for_label }}">District</label>
+                      <div class="col-sm-10">
+                          {{form.district}}
+                      </div>
+                  </div>
+                  <div class="form-group required">
+                      <label class="col-sm-2 control-label" for="{{ form.city.id_for_label }}">City</label>
+                      <div class="col-sm-10">
+                          {{form.city}}
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label class="col-sm-2 control-label" for="{{ form.landmark.id_for_label }}">Nearest Landmark</label>
+                      <div class="col-sm-10">
+                          {{form.landmark}}
+                      </div>
+                  </div>
+                  <div class="form-group required">
+                      <label class="col-sm-2 control-label" for="{{ form.address_line1.id_for_label }}">Address Line 1</label>
+                      <div class="col-sm-10">
+                          {{form.address_line1}}
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label class="col-sm-2 control-label" for="{{ form.address_line2.id_for_label }}">Address Line 2</label>
+                      <div class="col-sm-10">
+                          {{form.address_line2}}
+                      </div>
+                  </div>
+                  <div class="form-group required">
+                      <label class="col-sm-2 control-label" for="{{ form.contact_line1.id_for_label }}">Contact Line 1</label>
+                      <div class="col-sm-10">
+                          {{form.contact_line1}}
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label class="col-sm-2 control-label" for="{{ form.contact_line2.id_for_label }}">Contact Line 2</label>
+                      <div class="col-sm-10">
+                          {{form.contact_line2}}
+                      </div>
+                  </div>
+                  <div class="form-group required">
+                      <label class="col-sm-2 control-label" for="{{ form.billing_address.id_for_label }}">Billing Address</label>
+                      <div class="col-sm-10">
+                          {{form.billing_address}}
+                      </div>
+                  </div>
+                  <div class="form-group required">
+                      <label class="col-sm-2 control-label" for="{{ form.shipping_address.id_for_label }}">Shippping Address</label>
+                      <div class="col-sm-10">
+                          {{form.shipping_address}}
+                      </div>
+                  </div>
+
+
+              </fieldset>
+              <div class="buttons">
+                  <div class="pull-right">
+                      <input type="submit" value="Update" class="btn btn-primary">
+                  </div>
+              </div>
+          </form>
+
+      </div>
+  </div>
+</div>
+{% endblock %}
+{% block extra_js %}
+
+<script type = "text/javascript" >
+
+$(document).ready(function(){
+    if($('#toggleMenuHeading').hasClass("open")){
+      $('#toggleMenuHeading').removeClass("open");
+    }
+});
+</script>
+<script type="text/javascript" src="{% static 'frontend/js/datetimepicker/bootstrap-datetimepicker.min.js' %}"></script>
+
+
+{% endblock %}

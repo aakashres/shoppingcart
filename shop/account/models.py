@@ -114,13 +114,20 @@ DISTRICT_CHOICES = (
 class Address(Timestampable):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     address_line1 = models.CharField(
-        "Address Line 1", max_length=255, null=True, blank=True)
+        "Address Line 1", max_length=255)
     address_line2 = models.CharField(
         "Address Line 2", max_length=255, null=True, blank=True)
+    contact_line1 = models.CharField(
+        "Contact Line 1", max_length=255)
+    contact_line2 = models.CharField(
+        "Contact Line 2", max_length=255, null=True, blank=True)
     landmark = models.CharField(
         "Nearest Landmark", max_length=255, null=True, blank=True)
-    city = models.CharField("City", max_length=255, null=True, blank=True)
-    district = models.PositiveIntegerField("City", choices=DISTRICT_CHOICES)
+    city = models.CharField("City", max_length=255)
+    district = models.PositiveIntegerField(
+        "District", choices=DISTRICT_CHOICES)
+    billing_address = models.BooleanField("Billing Address", default=False)
+    shipping_address = models.BooleanField("Shipping Address", default=False)
 
     def __str__(self):
         return self.user.username

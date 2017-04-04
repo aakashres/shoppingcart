@@ -1,0 +1,88 @@
+{% extends 'layouts/admin/base.html' %}
+{% load staticfiles %}
+
+{% block head_title %}
+{{block.super}} | Category Update
+{% endblock %}
+
+
+{% block extra_head %}
+<link type="text/css" rel="stylesheet" href="{% static 'assets/css/theme-default/libs//summernote/summernote.css' %}" />
+<link type="text/css" rel="stylesheet" href="{% static 'assets/css/theme-default/libs/select2/select2.css' %}" />
+{% endblock %}
+
+{% block content %}
+<section>
+    <div class="section-header">
+        <ol class="breadcrumb">
+            <li>Dashboard</li>
+            <li class="active">Category Update</li>
+        </ol>
+    </div>
+
+    <div class="section-body contain-lg">
+        <h2>Cagtegory Update</h2>
+        <!-- BEGIN BASIC ELEMENTS -->
+        <form class="form" role="form" action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            {{form.title}}
+                            <label for="{{ form.title.id_for_label }}">Category Title</label>
+                        </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            {{form.parent}}
+                            <label for="{{ form.parent.id_for_label }}">Parent Category</label>
+                        </div>
+                        </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ form.description.id_for_label }}">Description</label>
+                            <br>
+                            {{form.description}}
+                        </div>
+                        <div class="col-xs-12 text-right">
+                            <button class="btn ink-reaction btn-primary btn-raised" type="submit">Update</button>
+                        </div><!--end .col -->
+                    </div><!--end .card-body -->
+                </div><!--end .card -->
+
+            </div><!--end .col -->
+        </div><!--end .row -->
+        </form>
+    </div><!--end .section-body -->
+</section>
+
+{% endblock %}
+
+{% block extra_js%}
+<script src="{% static 'assets/js/libs/summernote/summernote.min.js' %}"></script>
+<script src="{% static 'assets/js/libs/select2/select2.min.js' %}"></script>
+
+<script type="text/javascript">
+    $('#category').addClass('active')
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#select-list').select2();
+        $('#summernote').summernote({
+            height:200,
+            toolbar: [
+                ['style', ['style']],
+                ['fontstyle', ['bold', 'italic', 'underline', 'clear']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']]
+            ]
+        });
+    });
+</script>
+{% endblock %}

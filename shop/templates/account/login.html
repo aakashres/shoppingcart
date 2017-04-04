@@ -2,6 +2,10 @@
 {% load staticfiles %}
 
 
+{% block head_title %}
+Login
+{% endblock %}
+
 {% block content%}
 <div class="main-container container">
   {% block breadcrumb %}
@@ -23,7 +27,7 @@
                 <p>By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.</p>
               </div>
               <div class="bottom-form">
-                <a href="{% url 'account:frontendRegistration' %}" class="btn btn-default pull-right">Register</a>
+                <a href="{% url 'account:registration' %}" class="btn btn-default pull-right">Register</a>
               </div>
             </div>
 

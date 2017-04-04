@@ -1,0 +1,171 @@
+{% extends 'layouts/admin/base.html' %}
+{% load staticfiles %}
+
+{% block head_title %}
+{{block.super}} | Product Create
+{% endblock %}
+
+{% block extra_head %}
+<link type="text/css" rel="stylesheet" href="{% static 'assets/css/theme-default/libs//summernote/summernote.css' %}" />
+<link type="text/css" rel="stylesheet" href="{% static 'assets/css/theme-default/libs/select2/select2.css' %}" />
+<link type="text/css" rel="stylesheet" href="{% static 'assets/css/theme-default/libs/multi-select/multi-select.css' %}" />
+<link type="text/css" rel="stylesheet" href="{% static 'assets/css/theme-default/libs/bootstrap-tagsinput/bootstrap-tagsinput.css' %}" />
+
+{% endblock %}
+
+{% block content %}
+<section>
+    <div class="section-header">
+        <ol class="breadcrumb">
+            <li>Dashboard</li>
+            <li class="active">Product Create</li>
+        </ol>
+    </div>
+    <div class="section-body contain-lg">
+        <!-- BEGIN BASIC ELEMENTS -->
+        <form class="form" role="form" action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-6 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group floating-label">
+                            {{form.name}}
+                            <label for="{{ form.name.id_for_label }}">Product Name</label>
+                        </div>
+                        <div class="form-group floating-label">
+                            {{form.reference_code}}
+                            <label for="{{ form.reference_code.id_for_label }}">Reference Code</label>
+                        </div>
+                        <div class="form-group floating-label">
+                            {{form.barcode}}
+                            <label for="{{ form.barcode.id_for_label }}">Barcode</label>
+                        </div>
+                    </div><!--end .card-body -->
+                </div><!--end .card -->
+            </div><!--end .col -->
+            <div class="col-md-6 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group floating-label">
+                            {{form.quantity}}
+                            <label for="{{ form.quantity.id_for_label }}">Quantity</label>
+                        </div>
+                        <div class="form-group">
+                            {{form.categories}}
+                            <label for="{{ form.categories.id_for_label }}">Categories</label>
+                        </div>
+                        <div class="form-group">
+                            {{form.tags}}
+                            <label for="{{ form.tags.id_for_label }}">Tags</label>
+                        </div>
+                    </div><!--end .card-body -->
+                </div><!--end .card -->
+            </div><!--end .col -->
+        </div><!--end .row -->
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        {{form.description}}
+                    </div><!--end .card-body -->
+                </div><!--end .card -->
+            </div><!--end .col -->
+        </div><!--end .row -->
+        <div class="row">
+            <div class="col-md-6 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group floating-label">
+                            {{form.photos}}
+                            <label for="{{ form.photos.id_for_label }}">Photos</label>
+                        </div>
+                    </div><!--end .card-body -->
+                </div><!--end .card -->
+            </div><!--end .col -->
+            <div class="col-md-6 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group floating-label">
+                            {{form.price}}
+                            <label for="{{ form.price.id_for_label }}">Price</label>
+                        </div>
+                        <div class="row">
+                        <div class="col-md-9 col-sm-9">
+                            <div class="form-group">
+                                {{form.vat}}
+                                <label for="{{ form.vat.id_for_label }}">VAT</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-3">
+                            <div class="form-group">
+                            <div class="checkbox checkbox-inline checkbox-styled">
+                                <label for="{{ form.vat_included.id_for_label }}">
+                                     {{form.vat_included}} <span>VAT Inclusive</span>
+                                </label>
+                            </div>
+
+                            </div>
+                        </div>
+                        </div>
+                        <div class="form-group">
+                            {{form.discount_percent}}
+                            <label for="{{ form.discount_percent.id_for_label }}">Discount Percent</label>
+                        </div>
+                        <div class="form-group">
+                            {{form.discount_amount}}
+                            <label for="{{ form.discount_amount.id_for_label }}">Discount Amount</label>
+                        </div>
+                        <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group">
+                                <div class="checkbox checkbox-inline checkbox-styled">
+                                    <label for="{{ form.visibility.id_for_label }}">
+                                         {{form.visibility}} <span>Visibility</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 text-right">
+                            <button class="btn ink-reaction btn-primary btn-raised" type="submit">Create</button>
+                        </div><!--end .col -->
+                        </div>
+                    </div><!--end .card-body -->
+                </div><!--end .card -->
+            </div><!--end .col -->
+        </div><!--end .row -->
+        </form>
+
+        <!-- END BASIC ELEMENTS -->
+    </div><!--end .section-body -->
+</section>
+
+{% endblock %}
+
+{% block extra_js%}
+<script src="{% static 'assets/js/libs/summernote/summernote.min.js' %}"></script>
+<script src="{% static 'assets/js/libs/select2/select2.min.js' %}"></script>
+<script src="{% static 'assets/js/libs/bootstrap-tagsinput/bootstrap-tagsinput.min.js' %}"></script>
+<script src="{% static 'assets/js/libs/multi-select/jquery.multi-select.js' %}"></script>
+
+
+<script type="text/javascript">
+    $('#product').addClass('active')
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#select-list').select2();
+        $('#summernote').summernote({
+            height:200,
+            toolbar: [
+                ['style', ['style']],
+                ['fontstyle', ['bold', 'italic', 'underline', 'clear']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']]
+            ]
+        });
+    });
+</script>
+{% endblock %}

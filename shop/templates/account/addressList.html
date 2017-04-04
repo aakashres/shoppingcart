@@ -1,0 +1,85 @@
+{% extends 'layouts/frontend/base.html' %}
+{% load staticfiles %}
+
+{% block extra_head %}
+<style type="text/css">
+  .grid-item { width: 49% }
+</style>
+{% endblock %}
+
+
+{% block head_title %}
+Address List
+{% endblock %}
+
+{% block content%}
+<div class="main-container container">
+  {% block breadcrumb %}
+  <ul class="breadcrumb">
+    <li><a href="#"><i class="fa fa-home"></i></a></li>
+    <li><a href="#">Profile </a></li>
+    <li><a href="#">Address</a></li>
+  </ul>
+  {% endblock %}
+  <div class="row">
+    <div class="col-sm-12">
+      <h2 class="title">My Address</h2>
+    </div>
+    <div class="grid" data-masonry='{ "itemSelector": ".grid-item"}'>
+      {% for address in addresses %}
+      <div class="grid-item" style="padding:10px">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">Address<a href="{% url 'account:addressUpdate' user address.id %}"><i class="fa fa-pencil pull-right"></i></a></h4>
+          </div>
+          <div id="collapse-coupon" class="panel-collapse collapse in" style="">
+            <div class="panel-body">
+              <ul class="simple-ul">
+                <li><strong>District:</strong> {{address.district}}</li>
+                <li><strong>City:</strong> {{address.city}}</li>
+                <li><strong>Address Line 1:</strong> {{address.address_line1}}</li>
+                {% if address.address_line2 %}
+                <li><strong>Address Line 2:</strong> {{address.address_line2}}</li>
+                {% endif %}
+                <li><strong>Contact Line 1:</strong> {{address.contact_line1}}</li>
+                  {% if address.contact_line2 %}
+                  <li><strong>Contact Line 2:</strong> {{address.contact_line2}}</li>
+                  {% endif %}
+                  {% if address.landmark %}
+                  <li><strong>Nearest Landmark:</strong> {{address.landmark}}</li>
+                  {% endif %}
+                  <li><strong>Billing Address:</strong> {{address.billing_address}}
+                  <input type="checkbox"
+                  {% if address.billing_address %}
+                  checked
+                  {% endif %} disabled > </li>
+                  <li><strong>Shipping Address:</strong> {{address.shipping_address}}
+                  <input type="checkbox"
+                  {% if address.shipping_address %}
+                  checked
+                  {% endif %} disabled > </li></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock %}
+{% block extra_js %}
+
+    <script type = "text/javascript" >
+
+      $(document).ready(function(){
+        if($('#toggleMenuHeading').hasClass("open")){
+          $('#toggleMenuHeading').removeClass("open");
+        }
+      });
+    </script>
+    <script type="text/javascript" src="{% static 'frontend/js/datetimepicker/bootstrap-datetimepicker.min.js' %}"></script>
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+
+
+    {% endblock %}

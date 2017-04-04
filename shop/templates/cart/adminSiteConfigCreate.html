@@ -1,0 +1,53 @@
+{% extends 'layouts/admin/base.html' %}
+{% load staticfiles %}
+
+{% block head_title %}
+{{block.super}} | Site Config Create
+{% endblock %}
+
+{% block content %}
+<section>
+    <div class="section-header">
+        <ol class="breadcrumb">
+            <li>Dashboard</li>
+            <li class="active">Site Config Create</li>
+        </ol>
+    </div>
+
+    <div class="section-body contain-lg">
+    <h2>Site Config Create</h2>
+
+        <!-- BEGIN BASIC ELEMENTS -->
+        <form class="form" role="form" action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group floating-label">
+                            {{form.key}}
+                            <label for="{{ form.key.id_for_label }}">Site Config Key</label>
+                        </div>
+                        <div class="form-group floating-label">
+                            {{form.value}}
+                            <label for="{{ form.value.id_for_label }}">Site Config Value</label>
+                        </div>
+                        <div class="col-xs-12 text-right">
+                            <button class="btn ink-reaction btn-primary btn-raised" type="submit">Create</button>
+                        </div><!--end .col -->
+                    </div><!--end .card-body -->
+                </div><!--end .card -->
+
+            </div><!--end .col -->
+        </div><!--end .row -->
+        </form>
+    </div><!--end .section-body -->
+</section>
+
+{% endblock %}
+
+{% block extra_js%}
+<script type="text/javascript">
+    $('#siteConfig').addClass('active')
+</script>
+{% endblock %}

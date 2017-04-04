@@ -50,6 +50,25 @@ class UserForm(forms.ModelForm):
         return password2
 
 
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = [
+            "first_name",
+            "last_name",
+        ]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in iter(self.fields):
+            self.fields[field].widget.attrs.update({'class': 'form-control'})
+
+        self.fields["first_name"].widget.attrs.update(
+            {'placeholder': 'First Name'})
+        self.fields["last_name"].widget.attrs.update(
+            {'placeholder': 'Last Name', 'required': 'true'})
+
+
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
@@ -68,21 +87,40 @@ class ProfileForm(forms.ModelForm):
              'required': 'true'})
 
 
-class AdressFrom(forms.ModelForm):
+class AddressForm(forms.ModelForm):
     class Meta:
         model = Address
         fields = [
             "address_line1",
             "address_line2",
+            "contact_line1",
+            "contact_line2",
             "landmark",
             "city",
             "district",
+            "billing_address",
+            "shipping_address",
         ]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in iter(self.fields):
-            self.fields[field].widget.attrs.update({'class': 'form-control'})
+            if not field == "billing_address" and not field == "shipping_address":
+                self.fields[field].widget.attrs.update(
+                    {'class': 'form-control'})
+        self.fields["address_line1"].widget.attrs.update(
+            {'placeholder': 'Address Line 1'})
+        self.fields["address_line2"].widget.attrs.update(
+            {'placeholder': 'Address Line 2'})
+        self.fields["contact_line1"].widget.attrs.update(
+            {'placeholder': 'Contact Line 1'})
+        self.fields["contact_line2"].widget.attrs.update(
+            {'placeholder': 'Contact Line 2'})
+        self.fields["landmark"].widget.attrs.update(
+            {'placeholder': 'Nearest Landmark'})
+        self.fields["city"].widget.attrs.update(
+            {'placeholder': 'City'})
+
 
 
 class LoginForm(forms.Form):
